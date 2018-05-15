@@ -9,7 +9,22 @@ public class CuotaVariable extends JFrame implements ActionListener
 	Container contenedor;
 	
 	JButton btnCuotaFija;
-	JButton btnCuotaVariable;	
+	JButton btnCuotaVariable;
+	
+	JLabel lblIngreseCapital;
+	JTextField txtCapital;
+
+	JLabel lblIngreseInteres;
+	JTextField txtInteres;
+
+	JLabel lblIngreseTasa;
+	JTextField txtTasa;
+
+	JLabel lblTiposIntereses;
+	JList ddlTipoInteres;
+
+	JLabel lblIngreseCuotas;
+	JTextField txtCuotas;
 	
 	//M�todo que muestra la venta Principal
 	public CuotaVariable()
@@ -33,6 +48,12 @@ public class CuotaVariable extends JFrame implements ActionListener
 		btnCuotaVariable.setBounds(540,10,130,30);
 		btnCuotaVariable.addActionListener(this);
 		contenedor.add(btnCuotaVariable);
+
+		lblIngreseCapital = new JButton("Ingrese el capital:");
+		btnCuotaFija.setBounds(10,10,100,30);
+		btnCuotaFija.addActionListener(this);
+		contenedor.add(btnCuotaFija);
+
 				
 		//dibujo el contenedor en pantalla
 		contenedor.repaint();

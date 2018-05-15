@@ -1,7 +1,7 @@
 /* Menu.java
  * Descripci�n: Clase de muestra para ilustrar como funcionan las interfaces gr�ficas de usuario en Java
  * Fecha de creaci�n: 03 de mayo de 2108
- * @author: Carlos Monsalve
+ * @author:  Monsalve
  * @mail: remonsa@gmail.com
  * @versi�n: 1.0
  */
