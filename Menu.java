@@ -12,7 +12,6 @@ import java.awt.*; //se importa para el manejo de objetos gr�ficos
 import java.awt.event.*; //se importa para el manejo de eventos
 import javax.swing.*; //librer�a para manejar gr�ficos en ventanas
 
-
 //Clase principal
 public class Menu extends JFrame implements ActionListener
 {
@@ -32,10 +31,13 @@ public class Menu extends JFrame implements ActionListener
 	//M�todo que muestra la venta Principal
 	public Menu()
 	{
-		super("EJEMPLO DE GUI");
+		super("Finanzas Personales - The Musketeers");
 		contenedor = getContentPane();
 		contenedor.setLayout(null);
-		contenedor.setBackground(Color.GREEN);
+		
+		setContentPane(new JLabel(new ImageIcon("Images/background.png"))); //Imagen de fondo
+
+		//contenedor.setBackground(Color.GREEN);
 		
 		lblTitulo = new JLabel("PASTEL PARA TENER COMO REFERENCIA");
 		lblTitulo.setBounds(100,20,800,25);
@@ -103,13 +105,17 @@ public class Menu extends JFrame implements ActionListener
 		//m�todo principal
 		Menu p = new Menu();
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		p.setSize(700,700);
+		p.setSize(600,700);
 		p.setVisible(true);
 		
-		ImageIcon img = new ImageIcon("Icono.png");
+		ImageIcon img = new ImageIcon("Images/Icono.png");
 		p.setIconImage(img.getImage());
+
+		//Image imgBackground = Toolkit.getDefaultToolkit().createImage("Images/background.jpg");
+
 		
 	}
+
 	
 	//fin del programa
 }
