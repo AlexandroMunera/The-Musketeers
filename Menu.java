@@ -18,15 +18,9 @@ public class Menu extends JFrame implements ActionListener
 	//instancio atributos
 	Container contenedor;
 	
-	JButton boton;
-	JButton boton_limpiar;
-	JButton botonSalir;
-	
-	JTextField texto_a;
-	JTextField texto_b;
-	JPasswordField txtPassword;
-	JLabel lblTitulo;
-	
+	JButton btnCuotaFija;
+	JButton btnCuotaVariable;
+	JLabel fondo;
 	
 	//M�todo que muestra la venta Principal
 	public Menu()
@@ -35,41 +29,24 @@ public class Menu extends JFrame implements ActionListener
 		contenedor = getContentPane();
 		contenedor.setLayout(null);
 		
-		setContentPane(new JLabel(new ImageIcon("Images/background.png"))); //Imagen de fondo
+		//setContentPane(new JLabel(new ImageIcon("Images/background.png"))); //Imagen de fondo
 
 		//contenedor.setBackground(Color.GREEN);
-		
-		lblTitulo = new JLabel("PASTEL PARA TENER COMO REFERENCIA");
-		lblTitulo.setBounds(100,20,800,25);
-		contenedor.add(lblTitulo);
-		
-		// txtPassword = new JPasswordField(10);
-		// txtPassword.setBounds(10,10,200,25);
-		// contenedor.add(txtPassword);
-		
-		texto_a = new JTextField(10);
-		texto_a.setBounds(100,100,200,25);
-		contenedor.add(texto_a);
-		
-		texto_b = new JTextField(10);
-		texto_b.setBounds(100,400,200,25);
-		texto_b.setEditable(false);
-		contenedor.add(texto_b);
-		
-		boton = new JButton("TRASLADO");
-		boton.setBounds(100,200,200,30);
-		boton.addActionListener(this);
-		contenedor.add(boton);
-		
-		boton_limpiar = new JButton("LIMPIAR");
-		boton_limpiar.setBounds(100,300,200,30);
-		boton_limpiar.addActionListener(this);
-		contenedor.add(boton_limpiar);
 
-		botonSalir = new JButton("Salir");
-		botonSalir.setBounds(100,500,200,30);
-		botonSalir.addActionListener(this);
-		contenedor.add(botonSalir);
+		ImageIcon imagen = new ImageIcon("Images/background.png");
+		fondo = new JLabel(imagen);
+		fondo.setBounds(200, 20, 300, 300);
+		contenedor.add(fondo);		
+		
+		btnCuotaFija = new JButton("Cuota Fija");
+		btnCuotaFija.setBounds(100,400,200,100);
+		btnCuotaFija.addActionListener(this);
+		contenedor.add(btnCuotaFija);
+
+		btnCuotaVariable = new JButton("Cuota Variable");
+		btnCuotaVariable.setBounds(400,400,200,100);
+		btnCuotaVariable.addActionListener(this);
+		contenedor.add(btnCuotaVariable);
 				
 		//dibujo el contenedor en pantalla
 		contenedor.repaint();
@@ -80,22 +57,19 @@ public class Menu extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		//eventos del bot�n
-		if (e.getSource()==boton)
+		if (e.getSource()==btnCuotaFija)
 		{
-			texto_b.setText(texto_a.getText());
-			//texto_b.setBackground( new Color(107, 106, 104));
-			texto_b.setBackground(Color.red);
+			
 		}
 		
-		if (e.getSource()==boton_limpiar)
-		{
-			texto_b.setText("");
-			texto_a.setText("");
-		}
-		
-		if (e.getSource()==botonSalir)
-		{
-			System.exit(0);
+		if (e.getSource()==btnCuotaVariable)
+		{			
+			//this.setVisible(false); //Or this.dispose()
+			//new CuotaVariable().setVisible(true); // Main Form to show after the Login Form..
+			
+			CuotaVariable frame = new CuotaVariable();			
+			frame.setVisible(true);
+			this.setVisible(false);
 		}
 		
 	}
@@ -105,7 +79,7 @@ public class Menu extends JFrame implements ActionListener
 		//m�todo principal
 		Menu p = new Menu();
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		p.setSize(600,700);
+		p.setSize(700,600);
 		p.setVisible(true);
 		
 		ImageIcon img = new ImageIcon("Images/Icono.png");
