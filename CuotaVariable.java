@@ -5,6 +5,8 @@ import javax.swing.*; //librer�a para manejar gr�ficos en ventanas
 //Clase principal
 public class CuotaVariable extends JFrame implements ActionListener
 {
+	private static final long serialVersionUID = 1L; //Salira una alerta, con esto dejo de salir
+
 	//instancio atributos
 	Container contenedor;
 	
@@ -37,13 +39,22 @@ public class CuotaVariable extends JFrame implements ActionListener
 		//setSize(700,600);
 		setVisible(true);
 
-		JMenu menu, submenu;  
+		JMenu menu;  
 		JMenuItem menuItemSalir; 
 
           JMenuBar mb = new JMenuBar();  
-          menu=new JMenu("Operaciones  Ctrl+O");  
+		  menu=new JMenu("Operaciones");
+		  menu.setMnemonic(KeyEvent.VK_O);		 //Alt + O 
+
           //submenu=new JMenu("Sub Menu");  
-		  menuItemSalir=new JMenuItem("Salir  Ctrl+x");
+		  menuItemSalir=new JMenuItem("Salir");
+		  menuItemSalir.setAccelerator(KeyStroke.getKeyStroke('X', Toolkit.getDefaultToolkit ().getMenuShortcutKeyMaskEx()));
+		  menuItemSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
 		   
           menu.add(menuItemSalir);  
           //menu.add(submenu);  

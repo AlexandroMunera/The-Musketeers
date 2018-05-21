@@ -33,12 +33,12 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Menu",
+            "name": "Debug (Launch)-CuotaVariable",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "Menu",
+            "mainClass": "CuotaVariable",
             "args": ""
         },
         {
