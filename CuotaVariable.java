@@ -8,26 +8,11 @@ public class CuotaVariable extends JFrame implements ActionListener
 	private static final long serialVersionUID = 1L; //Salira una alerta, con esto dejo de salir
 
 	//instancio atributos
-	Container contenedor;
-	
-	JButton btnCuotaFija;
-	JButton btnCuotaVariable;
-	
-	JLabel lblIngreseCapital;
-	JTextField txtCapital;
+	private Container contenedor;
+	private JLabel lblTitulo, lblIngreseCapital,lblIngreseInteres,lblIngreseTasa,lblTiposIntereses,lblIngreseCuotas;
+	private JTextField txtCapital, txtInteres,txtTasa,txtCuotas;
+	private JComboBox ddlTipoInteres;
 
-	JLabel lblIngreseInteres;
-	JTextField txtInteres;
-
-	JLabel lblIngreseTasa;
-	JTextField txtTasa;
-
-	JLabel lblTiposIntereses;
-	JList ddlTipoInteres;
-
-	JLabel lblIngreseCuotas;
-	JTextField txtCuotas;
-	
 	//M�todo que muestra la venta Principal
 	public CuotaVariable()
 	{
@@ -64,23 +49,62 @@ public class CuotaVariable extends JFrame implements ActionListener
 		ImageIcon img = new ImageIcon("Images/Icono.png");
 		setIconImage(img.getImage());
 		
-		btnCuotaFija = new JButton("Cuota Fija");
-		btnCuotaFija.setBounds(440,10,100,30);
-		btnCuotaFija.addActionListener(this);
-		contenedor.add(btnCuotaFija);
-
-		btnCuotaVariable = new JButton("Cuota Variable");
-		btnCuotaVariable.setBounds(540,10,130,30);
-		btnCuotaVariable.addActionListener(this);
-		contenedor.add(btnCuotaVariable);
+		lblTitulo = new JLabel("AMORTIZACIÓN CON CUOTA VARIABLE");
+		lblTitulo.setBounds(200,10,700,30);
+		lblTitulo.setFont(new Font("Courier New", Font.BOLD, 30));
+    	lblTitulo.setForeground(Color.black);
+		contenedor.add(lblTitulo);
 
 		lblIngreseCapital = new JLabel("Ingrese el capital:");
 		lblIngreseCapital.setBounds(10,30,100,30);
 		contenedor.add(lblIngreseCapital);
 
 		txtCapital = new JTextField();
-		txtCapital.setBounds(10,65,100,20);
+		txtCapital.setBounds(10,65,200,20);
 		contenedor.add(txtCapital);
+
+		lblIngreseInteres = new JLabel("Interés:");
+		lblIngreseInteres.setBounds(10,90,100,30);
+		contenedor.add(lblIngreseInteres);
+
+		txtInteres = new JTextField();
+		txtInteres.setBounds(10,125,200,20);
+		contenedor.add(txtInteres);
+
+		lblIngreseTasa = new JLabel("Tasa:");
+		lblIngreseTasa.setBounds(10,150,100,30);
+		contenedor.add(lblIngreseTasa);
+
+		txtTasa = new JTextField();
+		txtTasa.setBounds(10,185,200,20);
+		contenedor.add(txtTasa);
+
+		lblTiposIntereses = new JLabel("Tipo de Interés:");
+		lblTiposIntereses.setBounds(220,150,100,30);
+		contenedor.add(lblTiposIntereses);
+
+		ddlTipoInteres = new JComboBox();
+		ddlTipoInteres.setBounds(220,185,200,20);
+		ddlTipoInteres.addItem("Seleccione un interés");
+		ddlTipoInteres.addItem("Efectivo anual");
+		ddlTipoInteres.addItem("Efectivo semestral");
+		ddlTipoInteres.addItem("Efectivo trimestral");
+		ddlTipoInteres.addItem("Efectivo mensual");
+		ddlTipoInteres.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.print(ddlTipoInteres.getSelectedItem().toString());
+			}
+		});
+		contenedor.add(ddlTipoInteres);
+
+		lblIngreseCuotas = new JLabel("Cuotas:");
+		lblIngreseCuotas.setBounds(430,150,100,30);
+		contenedor.add(lblIngreseCuotas);
+
+		txtCuotas = new JTextField();
+		txtCuotas.setBounds(430,185,200,20);
+		contenedor.add(txtCuotas);
 
 				
 		//dibujo el contenedor en pantalla
@@ -92,25 +116,20 @@ public class CuotaVariable extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		//eventos del bot�n
-		if (e.getSource()==btnCuotaFija)
-		{
+		//if (e.getSource()==btnCuotaFija)
+		//{
 			
-		}
-		
-		if (e.getSource()==btnCuotaVariable)
-		{			
-			//this.setVisible(false); //Or this.dispose()
-			//new CuotaVariable().setVisible(true); // Main Form to show after the Login Form..
-			
-			CuotaVariable frame = new CuotaVariable();			
-			frame.setVisible(true);
-			this.setVisible(false);
-		}
+		//}
 		
 	}
 
 	public static void main(String args[])
 	{
+		System.setProperty("file.encoding","UTF-8");
+		Field charset = Charset.class.getDeclaredField("defaultCharset");
+		charset.setAccessible(true);
+		charset.set(null,null);
+		
 		//m�todo principal
 		CuotaVariable p = new CuotaVariable();
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,7 +137,7 @@ public class CuotaVariable extends JFrame implements ActionListener
 		p.setVisible(true);
 		p.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		//p.setUndecorated(true);
-		
+
 		ImageIcon img = new ImageIcon("Images/Icono.png");
 		p.setIconImage(img.getImage());
 
