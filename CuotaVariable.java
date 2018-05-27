@@ -2,16 +2,32 @@ import java.awt.*; //se importa para el manejo de objetos gr�ficos
 import java.awt.event.*; //se importa para el manejo de eventos
 import javax.swing.*; //librer�a para manejar gr�ficos en ventanas
 
+import javax.swing.event.*;
+import javax.swing.text.*;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
+import java.text.*;
+
 //Clase principal
-public class CuotaVariable extends JFrame implements ActionListener
+public class CuotaVariable extends JFrame implements ActionListener,PropertyChangeListener
 {
-	private static final long serialVersionUID = 1L; //Salira una alerta, con esto dejo de salir
+	private static final long serialVersionUID = 1L; //Salía una alerta, con esto dejo de salir
 
 	//instancio atributos
 	private Container contenedor;
-	private JLabel lblTitulo, lblIngreseCapital,lblIngreseInteres,lblIngreseTasa,lblTiposIntereses,lblIngreseCuotas;
-	private JTextField txtCapital, txtInteres,txtTasa,txtCuotas;
+	private JLabel lblTitulo, lblIngreseCapital,lblIngreseInteres,lblIngreseTasa,lblTiposIntereses,lblIngreseCuotas;	
 	private JComboBox ddlTipoInteres;
+	private JFormattedTextField txtCapital,txtInteres,txtTasa,txtCuotas;
+
+	//Values for the fields
+    private double capital = 0;
+	private double intereses = 7.5;  //7.5%
+	private double tasa = 0;  
+	private int numCuotas = 12;	
+
+	private NumberFormat capitalFormat;	
 
 	//M�todo que muestra la venta Principal
 	public CuotaVariable()
@@ -59,24 +75,35 @@ public class CuotaVariable extends JFrame implements ActionListener
 		lblIngreseCapital.setBounds(10,30,100,30);
 		contenedor.add(lblIngreseCapital);
 
-		txtCapital = new JTextField();
+		
+		capitalFormat = NumberFormat.getCurrencyInstance();
+		capitalFormat.setMaximumFractionDigits(0);
+		txtCapital = new JFormattedTextField(capitalFormat);
 		txtCapital.setBounds(10,65,200,20);
+		txtCapital.setValue(capital);	
+		txtCapital.addPropertyChangeListener("value", this);
 		contenedor.add(txtCapital);
 
 		lblIngreseInteres = new JLabel("Interés:");
 		lblIngreseInteres.setBounds(10,90,100,30);
 		contenedor.add(lblIngreseInteres);
 
-		txtInteres = new JTextField();
+		txtInteres = new JFormattedTextField();
 		txtInteres.setBounds(10,125,200,20);
+		txtInteres.setValue(intereses);	
+		txtInteres.addPropertyChangeListener("value", this);
+
 		contenedor.add(txtInteres);
 
 		lblIngreseTasa = new JLabel("Tasa:");
 		lblIngreseTasa.setBounds(10,150,100,30);
 		contenedor.add(lblIngreseTasa);
 
-		txtTasa = new JTextField();
+		txtTasa = new JFormattedTextField();
 		txtTasa.setBounds(10,185,200,20);
+		txtTasa.setValue(tasa);	
+		txtTasa.addPropertyChangeListener("value", this);
+
 		contenedor.add(txtTasa);
 
 		lblTiposIntereses = new JLabel("Tipo de Interés:");
@@ -102,14 +129,32 @@ public class CuotaVariable extends JFrame implements ActionListener
 		lblIngreseCuotas.setBounds(430,150,100,30);
 		contenedor.add(lblIngreseCuotas);
 
-		txtCuotas = new JTextField();
-		txtCuotas.setBounds(430,185,200,20);
+		txtCuotas = new JFormattedTextField();
+		txtCuotas.setBounds(430,185,200,20);	
+		txtCuotas.setValue(numCuotas);	
+		txtCuotas.addPropertyChangeListener("value", this);
 		contenedor.add(txtCuotas);
 
 				
 		//dibujo el contenedor en pantalla
 		contenedor.repaint();
 		
+	}
+
+	/** Called when a field's "value" property changes. */
+    public void propertyChange(PropertyChangeEvent e) {
+        Object source = e.getSource();
+	   
+		if (source == txtInteres) {
+            intereses = ((Number)txtInteres.getValue()).doubleValue();
+		}
+		else if (source == txtTasa) {
+            tasa = ((Number)txtTasa.getValue()).doubleValue();
+        }
+		else if (source == txtCuotas) {
+            numCuotas = ((Number)txtCuotas.getValue()).intValue();
+        }
+
 	}
 	
 	//m�todo de la interfaz de eventos donde se escuchan los eventos
@@ -124,12 +169,7 @@ public class CuotaVariable extends JFrame implements ActionListener
 	}
 
 	public static void main(String args[])
-	{
-		System.setProperty("file.encoding","UTF-8");
-		Field charset = Charset.class.getDeclaredField("defaultCharset");
-		charset.setAccessible(true);
-		charset.set(null,null);
-		
+	{		
 		//m�todo principal
 		CuotaVariable p = new CuotaVariable();
 		p.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
